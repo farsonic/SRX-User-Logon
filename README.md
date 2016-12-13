@@ -156,4 +156,4 @@ The syslog_healthy.py and syslog_infected.py scripts will need to be mofified to
 
 Within the Splunk Search and Reporting screen select "Save As" and select Alert. This will allow us to trigger a script and use the values in the event to pass to the User-Logon script. 
 
-
+![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/Trigger-Alert.png)
