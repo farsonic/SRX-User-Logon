@@ -128,3 +128,19 @@ set services user-identification device-information end-user-profile profile-nam
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os-version string 10
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os string windows
 ```
+Once this profile has been created it can now be used in a security policy. I'm re-using the healthy/infected policy here to ensure that we are matching on corporate devices and their posture. 
+
+```
+set security policies from-zone trust to-zone untrust policy infected match source-address any
+set security policies from-zone trust to-zone untrust policy infected match destination-address any
+set security policies from-zone trust to-zone untrust policy infected match application any
+set security policies from-zone trust to-zone untrust policy infected match source-identity "bigcorp\posture-infected"
+set security policies from-zone trust to-zone untrust policy infected match source-end-user-profile corp-laptop
+set security policies from-zone trust to-zone untrust policy infected then deny
+set security policies from-zone trust to-zone untrust policy healthy match source-address any
+set security policies from-zone trust to-zone untrust policy healthy match destination-address any
+set security policies from-zone trust to-zone untrust policy healthy match application any
+set security policies from-zone trust to-zone untrust policy healthy match source-identity "bigcorp\posture-healthy"
+set security policies from-zone trust to-zone untrust policy healthy match source-end-user-profile corp-laptop
+set security policies from-zone trust to-zone untrust policy healthy then permit
+```
