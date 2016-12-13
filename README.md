@@ -61,3 +61,38 @@ To logoff a user from the network use the following command syntax
 ```
 ./User-Logon.py -o logoff -u Bob -a 192.168.0.56
 ```
+### SRX policy enforcement
+
+The SRX policy can now use the roles that are assigned as part of the source-identity. The source-identiy is a combination of the domain name (default is global) which in this example is bigcorp. 
+
+```
+set security policies from-zone trust to-zone untrust policy infected match source-address any
+set security policies from-zone trust to-zone untrust policy infected match destination-address any
+set security policies from-zone trust to-zone untrust policy infected match application any
+set security policies from-zone trust to-zone untrust policy infected match source-identity "bigcorp\posture-infected"
+set security policies from-zone trust to-zone untrust policy infected match source-identity "bigcorp\finance"
+set security policies from-zone trust to-zone untrust policy infected then deny
+set security policies from-zone trust to-zone untrust policy healthy match source-address any
+set security policies from-zone trust to-zone untrust policy healthy match destination-address any
+set security policies from-zone trust to-zone untrust policy healthy match application any
+set security policies from-zone trust to-zone untrust policy healthy match source-identity "bigcorp\posture-infected"
+set security policies from-zone trust to-zone untrust policy healthy match source-identity "bigcorp\finance"
+set security policies from-zone trust to-zone untrust policy healthy then permit
+```
+
+Once this policy is in place we can see that is it being matched by examining the users authentication-table entry. Withing the groups referenced section it states "finance". If the users posture changed to "infected" this would also be show as a group reference. 
+
+```
+admin@SRX320> show services user-identification authentication-table ip-address 192.168.0.6
+Domain: bigcorp
+  Source-ip: 192.168.0.6
+    Username: bob
+    Groups:posture-healthy, finance
+    Groups referenced by policy:finance
+    State: Valid
+    Source: Aruba ClearPass
+    Access start date: 2016-12-13
+    Access start time: 12:52:00
+    Last updated timestamp: 2016-12-13 13:04:21
+    Age time: 0
+```
