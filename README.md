@@ -23,7 +23,8 @@ Additionally the system allows for totally custom tags to be associated with eac
 
 The User_logon.py script allows these attributes to be dynamically programmed into the SRX. The following configuration entries will be required within JUNOS to configure the webapi service, permit the client IP address and authentication. Currently the script supports only HTTP communications while it is  possible for JUNOS to also support TLS encrypted HTTP. 
 
-set system services webapi user <USERNAME>
+'''set system services webapi user <USERNAME>
 set system services webapi user password <PASSWORD>
 set system services webapi client <IP ADDRESS>
 set system services webapi http port 8080
+'''
