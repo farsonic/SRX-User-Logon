@@ -70,13 +70,11 @@ set security policies from-zone trust to-zone untrust policy infected match sour
 set security policies from-zone trust to-zone untrust policy infected match destination-address any
 set security policies from-zone trust to-zone untrust policy infected match application any
 set security policies from-zone trust to-zone untrust policy infected match source-identity "bigcorp\posture-infected"
-set security policies from-zone trust to-zone untrust policy infected match source-identity "bigcorp\finance"
 set security policies from-zone trust to-zone untrust policy infected then deny
 set security policies from-zone trust to-zone untrust policy healthy match source-address any
 set security policies from-zone trust to-zone untrust policy healthy match destination-address any
 set security policies from-zone trust to-zone untrust policy healthy match application any
 set security policies from-zone trust to-zone untrust policy healthy match source-identity "bigcorp\posture-healthy"
-set security policies from-zone trust to-zone untrust policy healthy match source-identity "bigcorp\finance"
 set security policies from-zone trust to-zone untrust policy healthy then permit
 ```
 
