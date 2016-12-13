@@ -94,3 +94,37 @@ Domain: bigcorp
     Last updated timestamp: 2016-12-13 13:04:21
     Age time: 0
 ```
+
+### Script usage - Device parameters
+In addition to adding user details (Username, IP, Roles etc) it is also possible to associate a specific type of device and associated operating system details with the user. This can be enforced through policy to ensure that only specific corporate devices are allowed on the network. For example, only allow laptops running Windows 10 access to the Internet. 
+
+```
+./User-Logon.py -o logon -u Bob -a 192.168.0.6 -r Finance -d BigCorp -p Healthy --os Windows --version 10 --vendor Lenovo -t laptop --hostname Bobs-Super-laptop
+```
+
+When looking at the changes to the SRX the following dynamic user entry is now visible;
+
+```
+admin@SRX320> show services user-identification device-information table all extensive
+Domain: bigcorp
+Total entries: 1
+  Source IP: 192.168.0.6
+    Device ID: bobs-super-laptop
+    Device-Groups: N/A
+    device-category: laptop
+    device-vendor: lenovo
+    device-os-version: 10
+    Referred by: N/A
+```
+
+### SRX policy enforcement - Device details
+
+The SRX policy can now use the device specifics as part of the security policy. First a specific end-user-profile needs to be created to match your device paramters. 
+
+```
+set services user-identification device-information end-user-profile profile-name corp-laptop domain-name bigcorp
+set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-category string laptop
+set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-vendor string lenovo
+set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os-version string 10
+set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os string windows
+```
