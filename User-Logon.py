@@ -21,6 +21,7 @@ parser.add_argument('--hostname', help='Name of the machine/device)',required=Fa
 parser.add_argument('-t','--category', help='High level category of device(ie Desktop, Laptop, Tablet, Phone etc)',required=False)
 parser.add_argument('--vendor', help='Vendor/Manufacturer name',required=False)
 parser.add_argument('--type', help='Type of device (ie iPad, iPhone, Chromebook etc)',required=False)
+parser.add_argument('--model', help='Model of vendor device (ie X220, 7s, MacbookAir etc)',required=False)
 parser.add_argument('--os', help='Operating System name (ie Win10, OSX, Android)',required=False)
 parser.add_argument('--version', help='Operating System version number',required=False)
 
@@ -63,7 +64,7 @@ def logon():
     vendor.text = args.vendor
     attributes.insert(1,vendor)
     model = ET.Element("device-model")
-    model.text = args.type
+    model.text = args.model
     attributes.insert(2,model)
     os = ET.Element("device-os")
     os.text = args.os
