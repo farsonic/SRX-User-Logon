@@ -1,5 +1,5 @@
 # SRX-User-Logon
-## Start building your self-driving network defences :)
+### Buidling blocks for self-driving network defences :)
 
 Starting with the D70 release of software the SRX is capable of accepting dynamic variables for users and devices that are connected to the network. These variables are both fixed and user defined. Fixed variables include the following definitions
 
