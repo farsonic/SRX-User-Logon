@@ -21,6 +21,7 @@ End-user attributes exist for the device being used by the user, including;
 
 Additionally the system allows for totally custom tags to be associated with each end user allowing for any any information to be populated and matched within firewall policy
 
+### SRX Configuration requirements
 The User_logon.py script allows these attributes to be dynamically programmed into the SRX. The following configuration entries will be required within JUNOS to configure the webapi service, permit the client IP address and authentication. Currently the script supports only HTTP communications while it is  possible for JUNOS to also support TLS encrypted HTTP. In the below configuration changes the username and password are hard coded into the User_logon.py script. 
 
 ```
