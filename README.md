@@ -30,3 +30,29 @@ set system services webapi user password <PASSWORD>
 set system services webapi client <IP ADDRESS>
 set system services webapi http port 8080
 ```
+
+### Script usage
+Modify the User_logon.py script with the appropriate username/password (The provided script is using user1/password) The script has many possible parameters that can be modified; below is a basic example that could be triggered when a user logs into the network. 
+
+```
+./User-Logon.py -o logon -u Bob -a 192.168.0.56 -r Finance -d BigCorp -p Healthy
+```
+
+This simple example with perform a "logon" operation and assign the user to the role of Finance, AD Domain of BigCorp with a posture of Healthy. The bare minimum needed is username, role, IP Address and Posture. The IP Address can be either IPv4 or IPv6. 
+
+When looking at the changes to the SRX the following dynamic user entry is now visible;
+
+```
+admin@SRX320> show services user-identification authentication-table authentication-source all extensive
+Domain: GLOBAL
+Total entries: 1
+  Source-ip: 192.168.0.56
+    Username: bob
+    Groups:posture-healthy, finance
+    State: Valid
+    Source: Aruba ClearPass
+    Access start date: 2016-12-13
+    Access start time: 11:38:59
+    Last updated timestamp: 2016-12-13 11:40:31
+    Age time: 0
+```
