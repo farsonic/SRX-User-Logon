@@ -143,3 +143,10 @@ set security policies from-zone trust to-zone untrust policy deny match destinat
 set security policies from-zone trust to-zone untrust policy deny match application any
 set security policies from-zone trust to-zone untrust policy deny then deny
 ```
+
+### Third party integration - Splunk
+
+Third party systems can use this scripting infrastructure to dynamically provision users and device details into the SRX firewall. An example of this would be having Splunk make changes in reaction to receiving a specific SYSLOG event. In Splunk terms this is an Alert Action. The splunk-wrapper.py script as well as the user-logon.py script should be placed into the /opt/splunk/bin/scripts directory. The "wrapper" script receives the log entry (passed as reference to a locally stored csv file) and extracts the relevant parameters that are then passed to the user-logon script. The below examples are purely for reference and based on the log events being passed would need to be modified to accomdate. Additionally to "test" scripts have been provided to indicate a host is "healthy" or "infected" 
+
+
+
