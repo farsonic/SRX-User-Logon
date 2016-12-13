@@ -44,7 +44,7 @@ When looking at the changes to the SRX the following dynamic user entry is now v
 
 ```
 admin@SRX320> show services user-identification authentication-table authentication-source all extensive
-Domain: GLOBAL
+Domain: bigcorp
 Total entries: 1
   Source-ip: 192.168.0.56
     Username: bob
