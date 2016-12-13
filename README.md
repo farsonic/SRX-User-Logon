@@ -56,3 +56,8 @@ Total entries: 1
     Last updated timestamp: 2016-12-13 11:40:31
     Age time: 0
 ```
+To logoff a user from the network use the following command syntax
+
+```
+./User-Logon.py -o logoff -u Bob -a 192.168.0.56
+```
