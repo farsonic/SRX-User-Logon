@@ -151,6 +151,7 @@ Third party systems can use this scripting infrastructure to dynamically provisi
 The syslog_healthy.py and syslog_infected.py scripts will need to be mofified to change the IP Address of the Splunk server. Once these scripts are executed that generate a UDP SYSLOG event (on port 514) towards the Splunk server. These event lines are simply displaying a username, IP-Address and posture. These should be visible in the event viewer as follows;
 
 
-![Image of Splunk(https://octodex.github.com/images/yaktocat.png)
+![Image of Splunk Event entries
+(https://github.com/farsonic/SRX-User-Logon/blob/master/Splunk-Event.png)
 
 
