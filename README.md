@@ -61,7 +61,7 @@ To logoff a user from the network use the following command syntax
 ```
 ./User-Logon.py -o logoff -u Bob -a 192.168.0.56
 ```
-### SRX policy enforcement
+### SRX policy enforcement - Posture
 
 The SRX policy can now use the roles that are assigned as part of the source-identity. The source-identiy is a combination of the domain name (default is global) which in this example is bigcorp. 
 
