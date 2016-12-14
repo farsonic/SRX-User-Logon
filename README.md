@@ -131,7 +131,7 @@ set services user-identification device-information end-user-profile profile-nam
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os-version string 10
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os string windows
 ```
-Once this profile has been created it can now be used in a security policy. I'm re-using the healthy/infected policy here to ensure that we are matching on corporate devices and their posture. 
+Once this profile has been created it can now be used in a security policy; enforcing the use of only devices that meet our required standards. 
 
 ```
 set security policies from-zone trust to-zone untrust policy corp-laptop match source-address any
