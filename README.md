@@ -198,3 +198,7 @@ Use the following commands to see the resulting entries on the SRX
 ![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-Allocated-Users.png)
 
 ![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-Allocated-Users-Ext.png)
+
+When processing information passed from DNSMASQ the script will attempt to determine the equipment vendor based entierly on the MAC Address OUI information. This is passed to the SRX and can be viewed as part of the device-information output.
+
+![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-OUI-Lookup.png)
