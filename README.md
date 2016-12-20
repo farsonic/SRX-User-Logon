@@ -167,3 +167,32 @@ Within the Splunk Search and Reporting screen select "Save As" and select Alert.
 Configure the alert action to run for each event and to trigger the splunk-wrapper.py script. 
 
 ![Image of Splunk alert window ](https://github.com/farsonic/SRX-User-Logon/blob/master/Alert-Action.png)
+
+
+### Third party integration - DNSMASQ
+
+DNSMASQ is a popular DNS and DHCP server. When leasing or renewing a script through DHCP the DNSMASQ process can exectute a local script. DNSMASQ passes the following attributes to a script 
+
+* Operation type 
+* IP Address
+* Hostname (Optional as not all Operating Systems present this attribute) 
+* MAC Address 
+
+When using DNSMASQ the lease timer can also be decreased to a suitable value, with the lowest being 2 minutes. DHCP leases force the client to renew their lease within the time period specified. When DNSMASQ triggers a script it will pass the add or del option to the script. The wrapper script takes the add/del operation and triggers either a logon or logoff operation. The IP Address and MAC Address are also passed. The script then calls the user-logon script and notifies the SRX of the lease/renewal or removal of the device from the network. 
+
+To configure DNSMASQ to allocate addresses, the following can serve as an example for the 192.168.0.0/24 network. Edit the /etc/dnsmasq.conf file and then restart the process. The 5m option on the end forces clients (and therefore the script) to renew every 5 minutes. 
+
+```
+dhcp-range=192.168.0.100,192.168.0.180,5m
+```
+The dnsmasq_wrapper.py script can be placed anywhere on the server and configured in the /etc/dnsmasq.conf file as follows;
+
+```
+dhcp-script=/var/tmp/dnsmasq-srx.py
+```
+
+With this running when a new device requests an IP Address it will be allocated from the address range and the SRX will be notified of the hostname and IP-Address and assigned to role dhcp-allocated. If the hostname was not provided by the client then "unknown" will be inserted. 
+
+Use the following commands to see the resulting entries on the SRX
+
+
