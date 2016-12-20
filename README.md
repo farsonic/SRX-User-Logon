@@ -195,4 +195,6 @@ With this running when a new device requests an IP Address it will be allocated 
 
 Use the following commands to see the resulting entries on the SRX
 
+![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-Allocated-Users.png)
 
+![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-Allocated-Users-Ext.png)
