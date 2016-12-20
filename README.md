@@ -193,7 +193,7 @@ dhcp-range=192.168.0.100,192.168.0.180,5m
 The dnsmasq_wrapper.py script can be placed anywhere on the server and configured in the /etc/dnsmasq.conf file as follows;
 
 ```
-dhcp-script=/var/tmp/dnsmasq-srx.py
+dhcp-script=/var/tmp/dnsmasq_wrapper.py
 ```
 
 With this running when a new device requests an IP Address it will be allocated from the address range and the SRX will be notified of the hostname and IP-Address and assigned to role dhcp-allocated. If the hostname was not provided by the client then "unknown" will be inserted. 
