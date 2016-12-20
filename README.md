@@ -1,4 +1,5 @@
 # SRX-User-Logon
+### Buidling blocks for self-driving network defences :)
 
 Starting with the D70 release of software the SRX is capable of accepting dynamic variables for users and devices that are connected to the network. These variables are both fixed and user defined. Fixed variables include the following definitions
 
@@ -130,7 +131,7 @@ set services user-identification device-information end-user-profile profile-nam
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os-version string 10
 set services user-identification device-information end-user-profile profile-name corp-laptop attribute device-os string windows
 ```
-Once this profile has been created it can now be used in a security policy. I'm re-using the healthy/infected policy here to ensure that we are matching on corporate devices and their posture. 
+Once this profile has been created it can now be used in a security policy; enforcing the use of only devices that meet our required standards. 
 
 ```
 set security policies from-zone trust to-zone untrust policy corp-laptop match source-address any
@@ -143,3 +144,26 @@ set security policies from-zone trust to-zone untrust policy deny match destinat
 set security policies from-zone trust to-zone untrust policy deny match application any
 set security policies from-zone trust to-zone untrust policy deny then deny
 ```
+
+### Third party integration - Splunk
+
+Third party systems can use this scripting infrastructure to dynamically provision users and device details into the SRX firewall. An example of this would be having Splunk make changes in reaction to receiving a specific SYSLOG event. In Splunk terms this is an Alert Action. The splunk-wrapper.py script as well as the user-logon.py script should be placed into the /opt/splunk/bin/scripts directory. The "wrapper" script receives the log entry (passed as reference to a locally stored csv file) and extracts the relevant parameters that are then passed to the user-logon script. The below examples are purely for reference and based on the log events being passed would need to be modified to accomdate. Additionally to "test" scripts have been provided to indicate a host is "healthy" or "infected" 
+
+The syslog_healthy.py and syslog_infected.py scripts will need to be mofified to change the IP Address of the Splunk server. Once these scripts are executed that generate a UDP SYSLOG event (on port 514) towards the Splunk server. These event lines are simply displaying a username, IP-Address and posture. These should be visible in the event viewer as follows;
+
+
+![Image of Splunk Event entries](https://github.com/farsonic/SRX-User-Logon/blob/master/Splunk-Event.png)
+
+
+
+
+Within the Splunk Search and Reporting screen select "Save As" and select Alert. This will allow us to trigger a script and use the values in the event to pass to the User-Logon script. 
+
+![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/Trigger-Alert.png)
+
+
+
+
+Configure the alert action to run for each event and to trigger the splunk-wrapper.py script. 
+
+![Image of Splunk alert window ](https://github.com/farsonic/SRX-User-Logon/blob/master/Alert-Action.png)
