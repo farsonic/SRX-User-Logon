@@ -31,6 +31,11 @@ set system services webapi user password <PASSWORD>
 set system services webapi client <IP ADDRESS>
 set system services webapi http port 8080
 ```
+In order for the SRX to store device-information locally it needs to have the configuration type specified as follows; 
+
+```
+set services user-identification device-information authentication-source network-access-controller
+```
 
 ### Script usage - Users and Roles
 Modify the User_logon.py script with the appropriate username/password (The provided script is using user1/password) The script has many possible parameters that can be modified; below is a basic example that could be triggered when a user logs into the network. 
