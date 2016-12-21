@@ -35,3 +35,6 @@ if operation == "add":
 
 if operation == "del":
     subprocess.call([sys.executable, '/var/tmp/User-Logon.py', '-o','logoff','-a',ip,'-u',user])
+
+if operation == "old":
+    subprocess.call([sys.executable, '/var/tmp/User-Logon.py', '-o','logon','-a',ip,'-d',domain,'-r',role,'-u',user,'-p',posture,'--vendor',vendor,'-t',type,'--os',os,'--version',version,'--model',model,'--hostname',hostname])
