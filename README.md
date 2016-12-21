@@ -198,6 +198,11 @@ dhcp-script=/var/tmp/dnsmasq_wrapper.py
 
 With this running when a new device requests an IP Address it will be allocated from the address range and the SRX will be notified of the hostname and IP-Address and assigned to role dhcp-allocated. If the hostname was not provided by the client then "unknown" will be inserted. 
 
+If you are looking to fully trust your DNSMASQ server as the authoritive source of active DHCP users on your network you can disable the timers on the SRX for detecting active users. This will ensure that entries programmed by DNSMASQ are never removed by the SRX and will need a lease expire (and DEL action) from DNSMASQ to remove the entry. 
+
+```
+set services user-identification authentication-source aruba-clearpass authentication-entry-timeout 0
+```
 Use the following commands to see the resulting entries on the SRX
 
 ![Image of Splunk alert ](https://github.com/farsonic/SRX-User-Logon/blob/master/DNSMASQ-Allocated-Users.png)
